@@ -5,15 +5,24 @@
  */
 package InterfaceGrafica;
 
+import Codigo.PessoaFisicaTableModel;
+import Codigo.PessoaJuridicaTableModel;
+
 /**
  *
  * @author danie
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MenuPrincipal
-     */
+    PessoaFisicaTableModel tableModelPF = new PessoaFisicaTableModel();
+    PessoaJuridicaTableModel tableModelPJ = new PessoaJuridicaTableModel();
+    //CadastroPessoaFisica cadastroPF = new CadastroPessoaFisica(tableModelPF);
+    //CadastroPessoaJuridica cadastroPJ = new CadastroPessoaJuridica(tableModelPJ);
+    // consultaPF = new ConsultaPessoaFisica(tableModelPF);
+    //ConsultaPessoaJuridica consultaPJ = new ConsultaPessoaJuridica(tableModelPJ);
+    OpcaoCadastroPFOuPJ opcaoCadastro = new OpcaoCadastroPFOuPJ();
+    OpcaoConsultaPFOuPJ opcaoConsulta = new OpcaoConsultaPFOuPJ();
+    
     public MenuPrincipal() {
         initComponents();
     }
@@ -30,15 +39,32 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        ItemMenuCadastrarClientes = new javax.swing.JMenuItem();
+        ItemMenuConsultarClientes = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ByteBank");
+        setResizable(false);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ByteBankMain2.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ByteBankMain.png"))); // NOI18N
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Clientes.png"))); // NOI18N
         jMenu1.setText("Clientes");
+
+        ItemMenuCadastrarClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Cadastro.png"))); // NOI18N
+        ItemMenuCadastrarClientes.setText("Cadastrar Clientes");
+        ItemMenuCadastrarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemMenuCadastrarClientesActionPerformed(evt);
+            }
+        });
+        jMenu1.add(ItemMenuCadastrarClientes);
+
+        ItemMenuConsultarClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Consulta.png"))); // NOI18N
+        ItemMenuConsultarClientes.setText("Consultar Clientes");
+        jMenu1.add(ItemMenuConsultarClientes);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -56,11 +82,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ItemMenuCadastrarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemMenuCadastrarClientesActionPerformed
+        
+    }//GEN-LAST:event_ItemMenuCadastrarClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -92,12 +124,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuPrincipal().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem ItemMenuCadastrarClientes;
+    private javax.swing.JMenuItem ItemMenuConsultarClientes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

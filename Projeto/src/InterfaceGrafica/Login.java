@@ -116,7 +116,7 @@ public class Login extends javax.swing.JFrame {
                 menu.setVisible(true);
                 login.setVisible(false);
                 menu.setExtendedState(MAXIMIZED_BOTH);
-                login.dispose();
+                
             }
 
             else{
