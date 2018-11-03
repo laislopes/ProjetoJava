@@ -114,8 +114,9 @@ public class Login extends javax.swing.JFrame {
             if(txtLogin.getText().equals("admin") && txtSenha.getText().equals("admin")){
 
                 menu.setVisible(true);
-                menu.setExtendedState(MAXIMIZED_BOTH);
                 login.setVisible(false);
+                menu.setExtendedState(MAXIMIZED_BOTH);
+                login.dispose();
             }
 
             else{
@@ -129,7 +130,8 @@ public class Login extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         if(txtLogin.getText().equals("admin") && txtSenha.getText().equals("admin")){
 
-            new MenuPrincipal().setVisible(true);
+            menu.setVisible(true);
+            
         }
         else{
 
