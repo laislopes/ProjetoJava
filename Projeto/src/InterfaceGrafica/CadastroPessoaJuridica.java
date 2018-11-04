@@ -9,12 +9,12 @@ package InterfaceGrafica;
  *
  * @author danie
  */
-public class CadastroPessoaJuridica extends javax.swing.JPanel {
+public class CadastroPessoaFisica extends javax.swing.JPanel {
 
     /**
-     * Creates new form CadastroPessoaJuridica
+     * Creates new form CadastroPessoaFisica
      */
-    public CadastroPessoaJuridica() {
+    public CadastroPessoaFisica() {
         initComponents();
     }
 
