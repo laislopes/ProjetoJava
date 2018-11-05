@@ -6,6 +6,7 @@ import Codigo.PessoaFisicaTableModel;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author danie
@@ -354,7 +355,12 @@ public class CadastroPessoaFisica extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCEPActionPerformed
     
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        limpaCampos();
+       
+        int resposta = JOptionPane.showConfirmDialog(null,"Você realmente deseja cancelar a operação de Cadastro?", "Cancelar Operação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        if(resposta == 0){
+            limpaCampos();
+        }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed

@@ -122,7 +122,10 @@ public class Login extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         if(txtLogin.getText().equals("admin") && txtSenha.getText().equals("admin")){
 
+            menu = new MenuPrincipal();
             menu.setVisible(true);
+            menu.setExtendedState(MAXIMIZED_BOTH);
+            this.dispose();
             
         }
         else{
@@ -160,7 +163,7 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                login.setVisible(true);
             }
         });
     }

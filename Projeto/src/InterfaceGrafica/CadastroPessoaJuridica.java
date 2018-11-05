@@ -351,7 +351,11 @@ public class CadastroPessoaJuridica extends javax.swing.JInternalFrame {
     }
         
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        limpaCampos();
+        int resposta = JOptionPane.showConfirmDialog(null,"Você realmente deseja cancelar a operação de Cadastro?", "Cancelar Operação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        if(resposta == 0){
+            limpaCampos();
+        }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
