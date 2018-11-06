@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class ConsultaPessoaJuridica extends javax.swing.JInternalFrame {
 
-    private ArrayList<Integer> idClientePJ = new ArrayList<> ();
+    
     private PessoaJuridicaTableModel tableModel;
     
     public ConsultaPessoaJuridica(PessoaJuridicaTableModel tableModel) {
