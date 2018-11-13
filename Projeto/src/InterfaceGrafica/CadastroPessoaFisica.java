@@ -88,6 +88,11 @@ public class CadastroPessoaFisica extends javax.swing.JInternalFrame {
         jLabel2.setText("Data:");
 
         txtSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Feminino", "Masculino", " " }));
+        txtSexo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSexoActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Sexo:");
 
@@ -366,10 +371,19 @@ public class CadastroPessoaFisica extends javax.swing.JInternalFrame {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
 
         PessoaFisica PF = new PessoaFisica(txtCPF.getText(), idClientePJ);
-
+        String aux = txtSexo.toString();
+        
         PF.setNome(txtNomePF.getText());
         PF.setDataDoCadastro(txtData.getText());
-        PF.setSexo(txtSexo.toString());
+       
+        if(aux == "Masculino"){
+            
+            PF.setSexo(0);
+        }else if(aux == "Feminino"){
+            
+            PF.setSexo(1);
+        }
+
         PF.setEndereco(txtEndereco.getText());
         PF.setBairro(txtBairro.getText());
         PF.setCidade(txtCidade.getText());
@@ -387,6 +401,11 @@ public class CadastroPessoaFisica extends javax.swing.JInternalFrame {
 
         limpaCampos();
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+     
+    private void txtSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSexoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSexoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

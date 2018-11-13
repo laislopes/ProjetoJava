@@ -10,7 +10,7 @@ public class PessoaFisica extends Pessoa {
     private ArrayList<Integer> idClientePF;
     private String nome;
     private String CPF;
-    private String sexo;
+    private int sexo;
     private String celular;
     
     
@@ -45,11 +45,11 @@ public class PessoaFisica extends Pessoa {
        return idClientePF.get(linha);
    }
 
-    public String getSexo() {
+    public int getSexo() {
         return this.sexo;
     }
 
-    public void setSexo(String sexo) {
+    public void setSexo(int sexo) {
         this.sexo = sexo;
     }
 
