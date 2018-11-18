@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package InterfaceGrafica;
 
 import Codigo.PessoaFisicaTableModel;
@@ -10,6 +6,7 @@ import Codigo.PessoaJuridicaTableModel;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JDesktopPane;
 
 public class MenuPrincipal extends javax.swing.JFrame {
 
@@ -17,8 +14,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     PessoaJuridicaTableModel tableModelPJ = new PessoaJuridicaTableModel();
     CadastroPessoaFisica cadastroPF = new CadastroPessoaFisica(tableModelPF);
     CadastroPessoaJuridica cadastroPJ = new CadastroPessoaJuridica(tableModelPJ);
-    ConsultaPessoaFisica consultaPF = new ConsultaPessoaFisica(tableModelPF);
-    ConsultaPessoaJuridica consultaPJ = new ConsultaPessoaJuridica(tableModelPJ);  
+    ConsultaPessoaFisica consultaPF = new ConsultaPessoaFisica(tableModelPF,cadastroPF);
+    ConsultaPessoaJuridica consultaPJ =  new ConsultaPessoaJuridica(tableModelPJ,cadastroPJ);
     
 
     Image image = new ImageIcon(this.getClass().getResource("/Imagens/Bank.png")).getImage();

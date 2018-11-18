@@ -1,22 +1,28 @@
 
 package Codigo;
 
-import java.util.ArrayList;
+import InterfaceGrafica.CadastroPessoaJuridica;
+import dao.DAOPessoaJuridica;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 public class PessoaJuridicaTableModel extends AbstractTableModel{
     
-    List<PessoaJuridica> dados = new ArrayList <>();
+    private DAOPessoaJuridica daoPJ = new DAOPessoaJuridica();
+    List<PessoaJuridica> dados;
+    
+    public PessoaJuridicaTableModel(){
+        dados = daoPJ.getAll("");
+        if(daoPJ.hasError()) JOptionPane.showMessageDialog(null, daoPJ.getError());
+    }
     String[] colunas = {"ID","Razão Social", "CNPJ", "Inscrição Estadual", "Telefone", "E-mail", "Data do Cadastro"};
-
+    
     @Override
     public String getColumnName(int column) {
         return colunas[column];
     }
     
-    
-
     @Override
     public int getRowCount() {
         return dados.size();
@@ -32,7 +38,7 @@ public class PessoaJuridicaTableModel extends AbstractTableModel{
         
         switch(coluna){
             case 0:
-                return dados.get(linha).getIDCliente(linha);
+                return dados.get(linha).getId();
             case 1:
                 return dados.get(linha).getRazaoSocial();
             case 2:
@@ -40,28 +46,40 @@ public class PessoaJuridicaTableModel extends AbstractTableModel{
             case 3:
                 return dados.get(linha).getInscricaoEstadual();
             case 4:
-                return dados.get(linha).getTelefone();
+                return dados.get(linha).getCliente().getTelefone();
             case 5:
-                return dados.get(linha).getEmail();
+                return dados.get(linha).getCliente().getEmail();
             case 6:
-                return dados.get(linha).getDataDoCadastro();
+                return dados.get(linha).getCliente().getDataDoCadastro();
              
                 
         }
         return null;
         }
     
-    public void addRow(PessoaJuridica PJ){
+    public void refresh(){
         
-        this.dados.add(PJ);
+        this.dados = daoPJ.getAll("");
         this.fireTableDataChanged();
         
     }
     
+    public void buscar(List<PessoaJuridica> dados){
+        
+        this.dados = dados;
+        this.fireTableDataChanged();
+        
+    }
      public void removeRow(int linha){
         
-        this.dados.remove(linha);
+        daoPJ.deleteById(dados.get(linha).getId());
+        this.dados = daoPJ.getAll("");
         this.fireTableRowsDeleted(linha, linha);
+        
+    }
+     public void updateRow(int linha,CadastroPessoaJuridica cadastroPessoaJuridica){
+        
+        cadastroPessoaJuridica.atualizarCadastro(dados.get(linha));
         
     }
     

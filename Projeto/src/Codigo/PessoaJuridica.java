@@ -1,28 +1,16 @@
 package Codigo;
 
-import java.util.ArrayList;
 
-
-
-
-
-public class PessoaJuridica extends Pessoa {
+public class PessoaJuridica {
     
-    private static int id = 0;
-    private ArrayList<Integer> idClientePJ;
+    private Integer id;
     private String CNPJ;
     private String razaoSocial;
     private String nomeFantasia;
     private String inscricaoEstadual;
     private String site;
+    private Cliente cliente = new Cliente();
     
-    public PessoaJuridica(String CNPJ, ArrayList<Integer> idClientePJ ){
-        
-        this.CNPJ = CNPJ;
-        id++;
-        this.idClientePJ = idClientePJ;
-    }
-
     public String getCNPJ() {
         return this.CNPJ;
     }
@@ -38,17 +26,6 @@ public class PessoaJuridica extends Pessoa {
     public void setRazaoSocial(String razaoSocial) {
         this.razaoSocial = razaoSocial;
     }
-    
-    public void setIDCliente(){
-     
-     idClientePJ.add(id);
-     
-   }
-     public int getIDCliente(int linha){
-     
-     
-     return idClientePJ.get(linha);
-   }
          
     public String getNomeFantasia() {
         return this.nomeFantasia;
@@ -72,6 +49,21 @@ public class PessoaJuridica extends Pessoa {
 
     public void setSite(String site) {
         this.site = site;
+    }
+    public Cliente getCliente() {
+        return this.cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
     
     

@@ -1,69 +1,52 @@
 package Codigo;
 
-import java.util.ArrayList;
 
-
-
-public class PessoaFisica extends Pessoa {
-    
-    private static int id = 0;
-    private ArrayList<Integer> idClientePF;
+public class PessoaFisica {
+    private Integer id;
     private String nome;
-    private String CPF;
-    private int sexo;
+    private String cpf;
     private String celular;
-    
-    
-    
-    public PessoaFisica(String CPF,ArrayList<Integer> idClientePF ){
-        
-        this.CPF = CPF;
-        id++;
-        this.idClientePF = idClientePF;
-    }
+    private int sexo;
+    private Cliente cliente = new Cliente();
 
     public String getNome() {
         return this.nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
     public String getCPF() {
-        return this.CPF;
+        return this.cpf;
     }
-
     public void setCPF(String CPF) {
-        this.CPF = CPF;
+        this.cpf = CPF;
     }
-   
-    public void setIDCliente(){
-        idClientePF.add(id);
-   }
-   public int getIDCliente(int linha){
-       return idClientePF.get(linha);
-   }
-
     public int getSexo() {
         return this.sexo;
     }
-
     public void setSexo(int sexo) {
         this.sexo = sexo;
     }
-
     public String getCelular() {
         return this.celular;
     }
-
     public void setCelular(String celular) {
         this.celular = celular;
     }
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
     
+    public Integer getId() {
+        return id;
+    }
     
-   
-   
-    
-            
 }

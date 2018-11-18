@@ -1,9 +1,12 @@
 
 package InterfaceGrafica;
 
+import Codigo.Cliente;
 import Codigo.PessoaFisica;
 import Codigo.PessoaFisicaTableModel;
-import java.util.ArrayList;
+//import Codigo.PessoaFisica;
+//import Codigo.PessoaFisicaTableModel;
+import dao.DAOPessoaFisica;
 import javax.swing.JOptionPane;
 
 
@@ -12,14 +15,15 @@ import javax.swing.JOptionPane;
  * @author danie
  */
 public class CadastroPessoaFisica extends javax.swing.JInternalFrame {
-
-    private ArrayList<Integer> idClientePJ = new ArrayList<> ();
+   
+    DAOPessoaFisica daoPF = new DAOPessoaFisica();
     private PessoaFisicaTableModel tableModel;
+     private int idEdicao = 0;
     
     public CadastroPessoaFisica(PessoaFisicaTableModel tableModel) {
         initComponents();
         this.tableModel = tableModel;
-        
+        btnAtualizar.setVisible(false);
     }
 
     /**
@@ -34,8 +38,6 @@ public class CadastroPessoaFisica extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         txtNomePF = new javax.swing.JTextField();
         txtCPF = new javax.swing.JFormattedTextField();
-        txtData = new javax.swing.JFormattedTextField();
-        jLabel2 = new javax.swing.JLabel();
         txtSexo = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -61,6 +63,7 @@ public class CadastroPessoaFisica extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        btnAtualizar = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Cadastro de Pessoa Física");
@@ -79,15 +82,7 @@ public class CadastroPessoaFisica extends javax.swing.JInternalFrame {
             }
         });
 
-        try {
-            txtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        jLabel2.setText("Data:");
-
-        txtSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Feminino", "Masculino", " " }));
+        txtSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Feminino", "Masculino" }));
         txtSexo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSexoActionPerformed(evt);
@@ -111,12 +106,9 @@ public class CadastroPessoaFisica extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(txtNomePF, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 311, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtSexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(551, 551, 551))
         );
@@ -134,10 +126,7 @@ public class CadastroPessoaFisica extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(4, 4, 4)
-                        .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(49, 49, 49)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -299,6 +288,15 @@ public class CadastroPessoaFisica extends javax.swing.JInternalFrame {
             }
         });
 
+        btnAtualizar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnAtualizar.setText("Atualizar");
+        btnAtualizar.setPreferredSize(new java.awt.Dimension(90, 30));
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -312,9 +310,11 @@ public class CadastroPessoaFisica extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76)
+                .addGap(48, 48, 48)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,8 +326,9 @@ public class CadastroPessoaFisica extends javax.swing.JInternalFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         pack();
@@ -336,7 +337,6 @@ public class CadastroPessoaFisica extends javax.swing.JInternalFrame {
         
         txtCPF.setText("");
         txtNomePF.setText("");
-        txtData.setText("");
         txtSexo.setSelectedIndex(0);
         txtCelular.setText("");
         txtEndereco.setText("");
@@ -361,54 +361,125 @@ public class CadastroPessoaFisica extends javax.swing.JInternalFrame {
     
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
        
+      if(idEdicao == 0){
         int resposta = JOptionPane.showConfirmDialog(null,"Você realmente deseja cancelar a operação de Cadastro?", "Cancelar Operação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         
         if(resposta == 0){
             limpaCampos();
         }
+      }else{
+          this.dispose();
+      }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
 
-        PessoaFisica PF = new PessoaFisica(txtCPF.getText(), idClientePJ);
-        String aux = txtSexo.toString();
+        PessoaFisica pf = new PessoaFisica();
         
-        PF.setNome(txtNomePF.getText());
-        PF.setDataDoCadastro(txtData.getText());
+        
+        String aux = txtSexo.getSelectedItem().toString();
+        pf.setNome(txtNomePF.getText());
        
-        if(aux == "Masculino"){
-            
-            PF.setSexo(0);
-        }else if(aux == "Feminino"){
-            
-            PF.setSexo(1);
-        }
-
-        PF.setEndereco(txtEndereco.getText());
-        PF.setBairro(txtBairro.getText());
-        PF.setCidade(txtCidade.getText());
-        PF.setNumero(txtNumero.getText());
-        PF.setCep(txtCEP.getText());
-        PF.setUf(txtUF.getText());
-        PF.setEmail(txtEmailPF.getText());
-        PF.setTelefone(txtTelefone.getText());
-        PF.setCelular(txtCelular.getText());
-        PF.setIDCliente();
-
-        tableModel.addRow(PF);
-
-        JOptionPane.showMessageDialog(null, "Cliente Cadastrado com Sucesso!");
+        if(aux == "Masculino") pf.setSexo(0);
+        else if(aux == "Feminino") pf.setSexo(1);
+        
+        pf.setCPF(txtCPF.getText());
+        pf.setCelular(txtCelular.getText());
+        pf.getCliente().setEndereco(txtEndereco.getText());
+        pf.getCliente().setBairro(txtBairro.getText());
+        pf.getCliente().setCidade(txtCidade.getText());
+        pf.getCliente().setNumero(Integer.parseInt(txtNumero.getText()));
+        pf.getCliente().setCep(txtCEP.getText());
+        pf.getCliente().setEstado(txtUF.getText());
+        pf.getCliente().setEmail(txtEmailPF.getText());
+        pf.getCliente().setTelefone(txtTelefone.getText());
+        
+        daoPF.add(pf);
+        
+        if(daoPF.hasError()) JOptionPane.showMessageDialog(null, daoPF.getError());
+        else JOptionPane.showMessageDialog(null, "Cliente Cadastrado com Sucesso!");
 
         limpaCampos();
+        
+        tableModel.refresh();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
      
     private void txtSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSexoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSexoActionPerformed
+    
+    public void atualizarCadastro(PessoaFisica pF){
+        btnSalvar.setVisible(false);
+        btnAtualizar.setVisible(true);
+        idEdicao = pF.getId();
+        
+        txtCPF.setText(pF.getCPF());
+        txtNomePF.setText(pF.getNome());
+        if(pF.getSexo() == 0){
+            txtSexo.setSelectedItem("Masculino");
+        }else if(pF.getSexo() == 1){
+            txtSexo.setSelectedItem("Feminino");
+        }
+        
+        txtCelular.setText(pF.getCelular());
+        txtEndereco.setText(pF.getCliente().getEndereco());
+        txtBairro.setText(pF.getCliente().getBairro());
+        txtCidade.setText(pF.getCliente().getCidade());
+        txtNumero.setText(Integer.toString(pF.getCliente().getNumero()));
+        txtCEP.setText(pF.getCliente().getCep());
+        txtUF.setText(pF.getCliente().getEstado());
+        txtEmailPF.setText(pF.getCliente().getEmail());
+        txtTelefone.setText(pF.getCliente().getTelefone());
+        
+    }
+    
+    private void manipulaResultado(DAOPessoaFisica daoPF,String mensagemDeSucesso){
+        if(daoPF.hasError()) JOptionPane.showMessageDialog(null, daoPF.getError());
+        else JOptionPane.showMessageDialog(null, mensagemDeSucesso);
+
+        limpaCampos();
+        tableModel.refresh();
+        this.dispose();
+    }
+    
+    private PessoaFisica getPessoaFisicaDaTela(){
+        PessoaFisica pf = new PessoaFisica();
+        
+        pf.setId(idEdicao);
+        pf.setCPF(txtCPF.getText());
+        pf.setNome(txtNomePF.getText());
+        pf.setCelular(txtCelular.getText());
+        String aux = txtSexo.getSelectedItem().toString();
+        pf.setNome(txtNomePF.getText());
+       
+        if(aux == "Masculino") pf.setSexo(0);
+        else if(aux == "Feminino") pf.setSexo(1);
+        
+        pf.getCliente().setId(idEdicao);
+        pf.getCliente().setEndereco(txtEndereco.getText());
+        pf.getCliente().setBairro(txtBairro.getText());
+        pf.getCliente().setCidade(txtCidade.getText());
+        pf.getCliente().setNumero(Integer.parseInt(txtNumero.getText()));
+        pf.getCliente().setCep(txtCEP.getText());
+        pf.getCliente().setEstado(txtUF.getText());
+        pf.getCliente().setEmail(txtEmailPF.getText());
+        pf.getCliente().setTelefone(txtTelefone.getText());
+        
+        return pf;
+    }
+       
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        PessoaFisica pj = getPessoaFisicaDaTela();
+        daoPF.update(pj);
+        manipulaResultado(daoPF,"Cliente Atualizado com Sucesso!");
+        btnSalvar.setVisible(true);
+        btnAtualizar.setVisible(false);
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
@@ -419,7 +490,6 @@ public class CadastroPessoaFisica extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -431,7 +501,6 @@ public class CadastroPessoaFisica extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txtCPF;
     private javax.swing.JFormattedTextField txtCelular;
     private javax.swing.JTextField txtCidade;
-    private javax.swing.JFormattedTextField txtData;
     private javax.swing.JTextField txtEmailPF;
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtNomePF;
