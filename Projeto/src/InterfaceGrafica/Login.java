@@ -33,6 +33,7 @@ public class Login extends javax.swing.JFrame {
         jLLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/bytebankLogo.png"))); // NOI18N
 

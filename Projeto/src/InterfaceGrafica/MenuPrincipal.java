@@ -10,6 +10,7 @@ import Codigo.PessoaJuridicaTableModel;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class MenuPrincipal extends javax.swing.JFrame {
 
@@ -18,7 +19,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     CadastroPessoaFisica cadastroPF = new CadastroPessoaFisica(tableModelPF);
     CadastroPessoaJuridica cadastroPJ = new CadastroPessoaJuridica(tableModelPJ);
     ConsultaPessoaFisica consultaPF = new ConsultaPessoaFisica(tableModelPF);
-    ConsultaPessoaJuridica consultaPJ = new ConsultaPessoaJuridica(tableModelPJ);  
+    ConsultaPessoaJuridica consultaPJ = new ConsultaPessoaJuridica(tableModelPJ);
     
 
     Image image = new ImageIcon(this.getClass().getResource("/Imagens/Bank.png")).getImage();
@@ -55,6 +56,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ByteBank");
@@ -152,14 +157,37 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu5.setText("Encerramento de Conta");
 
         jMenuItem1.setText("Conta Corrente");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem1);
 
         jMenuItem4.setText("Conta Poupança");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem4);
 
         jMenu2.add(jMenu5);
 
         jMenuBar1.add(jMenu2);
+
+        jMenu6.setText("Usuários");
+
+        jMenuItem5.setText("Novo Usuário");
+        jMenu6.add(jMenuItem5);
+
+        jMenuItem6.setText("Editar Usuário");
+        jMenu6.add(jMenuItem6);
+
+        jMenuItem7.setText("Remover Usuário");
+        jMenu6.add(jMenuItem7);
+
+        jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
 
@@ -201,11 +229,59 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
+        int resposta = JOptionPane.showConfirmDialog(null, "Selecione a pessoa para a abertura da conta" , "ABERTURA DE CONTA", JOptionPane.YES_NO_CANCEL_OPTION);
+        if(resposta == 0){
+            AberturaContaPoupançaPF telaAberturaCPPF = new AberturaContaPoupançaPF();
+             jDesktopPane1.add(telaAberturaCPPF);
+             telaAberturaCPPF.setVisible(true);
+        }else if(resposta == 1){
+            AberturaContaPoupançaPJ telaAberturaCPPJ = new AberturaContaPoupançaPJ();
+            jDesktopPane1.add(telaAberturaCPPJ);
+            telaAberturaCPPJ.setVisible(true);
+        }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
+        int resposta = JOptionPane.showConfirmDialog(null, "Selecione a pessoa para a abertura da conta" , "ABERTURA DE CONTA", JOptionPane.YES_NO_CANCEL_OPTION);
+        if(resposta == 0){
+            AberturaContaCorrentePF telaAberturaCCPF = new AberturaContaCorrentePF();
+             jDesktopPane1.add(telaAberturaCCPF);
+             telaAberturaCCPF.setVisible(true);
+        }else if(resposta == 1){
+            AberturaContaCorrentePJ telaAberturaCCPJ = new AberturaContaCorrentePJ();
+            jDesktopPane1.add(telaAberturaCCPJ);
+            telaAberturaCCPJ.setVisible(true);
+        }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        int resposta = JOptionPane.showConfirmDialog(null, "Selecione a pessoa para a abertura da conta" , "ABERTURA DE CONTA", JOptionPane.YES_NO_CANCEL_OPTION);
+        if(resposta == 0){
+            EncerramentoContaCorrentePF telaEncerramentoCCPF = new EncerramentoContaCorrentePF();
+             jDesktopPane1.add(telaEncerramentoCCPF);
+             telaEncerramentoCCPF.setVisible(true);
+        }else if(resposta == 1){
+            EncerramentoContaCorrentePJ telaEncerramentoCCPJ = new EncerramentoContaCorrentePJ();
+            jDesktopPane1.add(telaEncerramentoCCPJ);
+            telaEncerramentoCCPJ.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        int resposta = JOptionPane.showConfirmDialog(null, "Selecione a pessoa para a abertura da conta" , "ABERTURA DE CONTA", JOptionPane.YES_NO_CANCEL_OPTION);
+        if(resposta == 0){
+            EncerramentoContaPoupançaPF telaEncerramentoCPPF = new EncerramentoContaPoupançaPF();
+             jDesktopPane1.add(telaEncerramentoCPPF);
+             telaEncerramentoCPPF.setVisible(true);
+        }else if(resposta == 1){
+            EncerramentoContaPoupançaPJ telaEncerramentoCPPJ = new EncerramentoContaPoupançaPJ();
+            jDesktopPane1.add(telaEncerramentoCPPJ);
+            telaEncerramentoCPPJ.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
   
     public static void main(String args[]) {
@@ -252,10 +328,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     // End of variables declaration//GEN-END:variables
 }
